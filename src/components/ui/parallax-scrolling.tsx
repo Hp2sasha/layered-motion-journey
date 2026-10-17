@@ -117,6 +117,8 @@ export function ParallaxComponent() {
                 className="parallax__layer-img parallax__sky"
                 data-sky="day"
               />
+              <div className="parallax__orb parallax__orb--sun" aria-hidden="true" />
+              <div className="parallax__orb parallax__orb--moon" aria-hidden="true" />
             </div>
             <img src={`${CDN}6717795b4d5ac529e7d3a562_osmo-parallax-layer-2.webp`} loading="eager" data-parallax-layer="2" alt="" className="parallax__layer-img" />
             <div data-parallax-layer="3" className="parallax__layer-title">
