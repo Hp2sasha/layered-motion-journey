@@ -154,3 +154,25 @@
 .parallax__fade { position: absolute; bottom: 0; left: 0; width: 100%; height: 20%; background: linear-gradient(to top, var(--parallax-bg), transparent); z-index: 30; }
 .parallax__black-line-overflow { position: absolute; bottom: -1px; left: 0; width: 100%; height: 2px; background: var(--parallax-bg); z-index: 20; }
 .parallax__content { position: relative; z-index: 2; min-height: 100vh; }
+
+/* Day / night modes. Night is the original moonlit mountain scene; day keeps the
+   same mountains under a star-filled sky with a lighter overall backdrop. */
+.parallax[data-mode="night"] { --parallax-bg: oklch(0.12 0 0); }
+.parallax[data-mode="day"] { --parallax-bg: oklch(0.34 0.05 250); --parallax-shadow: oklch(0.08 0.03 260 / 70%); }
+.parallax__layer-sky { position: absolute; inset: 0; }
+.parallax__sky { opacity: 0; transition: opacity 900ms ease; }
+.parallax[data-mode="night"] .parallax__sky[data-sky="night"],
+.parallax[data-mode="day"] .parallax__sky[data-sky="day"] { opacity: 1; }
+.parallax[data-mode="day"] .parallax__sky[data-sky="day"] { animation: parallax-twinkle 7s ease-in-out infinite; }
+.parallax[data-mode="day"] .parallax__layer-img:not(.parallax__sky) { filter: brightness(1.16) saturate(1.06); }
+@keyframes parallax-twinkle { 50% { filter: brightness(1.14); } }
+
+.parallax__mode { position: absolute; top: 1.5rem; inset-inline-start: 1.5rem; z-index: 10; display: flex; gap: 2px; padding: 4px; border-radius: 999px; border: 1px solid color-mix(in oklab, var(--parallax-fg) 22%, transparent); background: color-mix(in oklab, var(--parallax-bg) 55%, transparent); backdrop-filter: blur(10px); }
+.parallax__mode button { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 999px; border: 0; background: transparent; color: color-mix(in oklab, var(--parallax-fg) 65%, transparent); font-family: "Vazirmatn", "Lalezar", ui-sans-serif, system-ui, sans-serif; font-size: 0.85rem; line-height: 1; cursor: pointer; transition: color 200ms ease, background-color 200ms ease; }
+.parallax__mode button[data-active="true"] { background: color-mix(in oklab, var(--parallax-fg) 16%, transparent); color: var(--parallax-fg); }
+.parallax__mode button:focus-visible { outline: 2px solid var(--parallax-fg); outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .parallax__sky { transition: none; }
+  .parallax[data-mode="day"] .parallax__sky[data-sky="day"] { animation: none; }
+}
