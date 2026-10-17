@@ -144,7 +144,7 @@
 }
 
 :root { --parallax-bg: oklch(0.12 0 0); --parallax-fg: oklch(0.97 0 0); --parallax-shadow: oklch(0 0 0 / 60%); }
-.parallax { background: var(--parallax-bg); color: var(--parallax-fg); }
+.parallax { --mode-transition: 1500ms; background: var(--parallax-bg); color: var(--parallax-fg); transition: background-color var(--mode-transition) ease; }
 .parallax__header { position: relative; height: 100svh; min-height: 100vh; }
 .parallax__visuals { position: absolute; inset: 0; height: 120%; overflow: hidden; }
 .parallax__layers { position: absolute; inset: 0; overflow: hidden; }
@@ -160,12 +160,16 @@
 .parallax[data-mode="night"] { --parallax-bg: oklch(0.12 0 0); }
 .parallax[data-mode="day"] { --parallax-bg: oklch(0.24 0.05 255); --parallax-shadow: oklch(0.05 0.03 260 / 75%); }
 .parallax__layer-sky { position: absolute; inset: 0; }
-.parallax__sky { opacity: 0; transition: opacity 900ms ease; }
+.parallax__sky { opacity: 0; transition: opacity var(--mode-transition) ease; }
 .parallax[data-mode="night"] .parallax__sky[data-sky="night"],
 .parallax[data-mode="day"] .parallax__sky[data-sky="day"] { opacity: 1; }
 .parallax[data-mode="day"] .parallax__sky[data-sky="day"] { animation: parallax-twinkle 7s ease-in-out infinite; }
 /* Mountains stay moonlit-dark in day mode too: dimmed, cooled toward blue. */
-.parallax[data-mode="day"] .parallax__layer-img:not(.parallax__sky) { filter: sepia(0.4) hue-rotate(180deg) saturate(0.9) brightness(0.42) contrast(1.08); }
+.parallax__layers > .parallax__layer-img { transition: filter var(--mode-transition) ease; }
+.parallax[data-mode="day"] .parallax__layers > .parallax__layer-img { filter: sepia(0.4) hue-rotate(180deg) saturate(0.9) brightness(0.42) contrast(1.08); }
+.parallax__celestial { opacity: 0; transform: translateY(-5%) scale(0.96); transition: opacity var(--mode-transition) ease, transform var(--mode-transition) cubic-bezier(0.22, 1, 0.36, 1); }
+.parallax[data-celestial="sun"] [data-body="sun"],
+.parallax[data-celestial="moon"] [data-body="moon"] { opacity: 1; transform: translateY(0) scale(1); }
 @keyframes parallax-twinkle { 50% { filter: brightness(1.14); } }
 
 .parallax__mode { position: absolute; top: 1.5rem; inset-inline-start: 1.5rem; z-index: 10; display: flex; gap: 2px; padding: 4px; border-radius: 999px; border: 1px solid color-mix(in oklab, var(--parallax-fg) 22%, transparent); background: color-mix(in oklab, var(--parallax-bg) 55%, transparent); backdrop-filter: blur(10px); }
@@ -174,6 +178,6 @@
 .parallax__mode button:focus-visible { outline: 2px solid var(--parallax-fg); outline-offset: 2px; }
 
 @media (prefers-reduced-motion: reduce) {
-  .parallax__sky { transition: none; }
+  .parallax, .parallax__sky, .parallax__celestial, .parallax__layers > .parallax__layer-img { transition: none; }
   .parallax[data-mode="day"] .parallax__sky[data-sky="day"] { animation: none; }
 }

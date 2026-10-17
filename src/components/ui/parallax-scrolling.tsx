@@ -3,12 +3,15 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "@studio-freight/lenis";
 import starrySky from "@/assets/hero-sky-starry.webp";
+import clearSky from "@/assets/hero-sky-no-sun.webp";
+import sun from "@/assets/hero-sun.png";
+import moon from "@/assets/hero-moon.png";
+import { Button } from "@/components/ui/button";
+import { celestialBodyForMode, MODE_TRANSITION_MS, type Mode } from "./parallax-mode";
 
 const CDN = "https://cdn.prod.website-files.com/671752cd4027f01b1b8f1c7f/";
-const MOONLIT_SKY = `${CDN}6717795be09b462b2e8ebf71_osmo-parallax-layer-3.webp`;
 
 const MODE_KEY = "torino:mode";
-type Mode = "day" | "night";
 
 function SunIcon() {
   return (
@@ -51,6 +54,7 @@ export function ParallaxComponent() {
   const [mode, setMode] = useState<Mode>("night");
 
   useEffect(() => {
+    parallaxRef.current?.style.setProperty("--mode-transition", `${MODE_TRANSITION_MS}ms`);
     const saved = window.localStorage.getItem(MODE_KEY);
     if (saved === "day" || saved === "night") setMode(saved);
   }, []);
@@ -97,14 +101,14 @@ export function ParallaxComponent() {
   }, []);
 
   return (
-    <div className="parallax" ref={parallaxRef} data-mode={mode}>
+    <div className="parallax" ref={parallaxRef} data-mode={mode} data-celestial={celestialBodyForMode(mode)}>
       <section className="parallax__header">
         <div className="parallax__visuals">
           <div className="parallax__black-line-overflow" />
           <div data-parallax-layers className="parallax__layers">
             <div data-parallax-layer="1" className="parallax__layer-sky">
               <img
-                src={MOONLIT_SKY}
+                src={clearSky}
                 loading="eager"
                 alt=""
                 className="parallax__layer-img parallax__sky"
@@ -117,6 +121,8 @@ export function ParallaxComponent() {
                 className="parallax__layer-img parallax__sky"
                 data-sky="day"
               />
+              <img src={sun} width={2000} height={1906} loading="eager" alt="" className="parallax__layer-img parallax__celestial" data-body="sun" />
+              <img src={moon} width={2000} height={1906} loading="eager" alt="" className="parallax__layer-img parallax__celestial" data-body="moon" />
             </div>
             <img src={`${CDN}6717795b4d5ac529e7d3a562_osmo-parallax-layer-2.webp`} loading="eager" data-parallax-layer="2" alt="" className="parallax__layer-img" />
             <div data-parallax-layer="3" className="parallax__layer-title">
@@ -127,7 +133,7 @@ export function ParallaxComponent() {
           <div className="parallax__fade" />
         </div>
         <div className="parallax__mode" dir="rtl" role="group" aria-label="حالت نمایش آسمان">
-          <button
+          <Button variant="ghost"
             type="button"
             data-active={mode === "day"}
             aria-pressed={mode === "day"}
@@ -135,8 +141,8 @@ export function ParallaxComponent() {
           >
             <SunIcon />
             <span>روز</span>
-          </button>
-          <button
+          </Button>
+          <Button variant="ghost"
             type="button"
             data-active={mode === "night"}
             aria-pressed={mode === "night"}
@@ -144,7 +150,7 @@ export function ParallaxComponent() {
           >
             <MoonIcon />
             <span>شب</span>
-          </button>
+          </Button>
         </div>
       </section>
       <section className="parallax__content" aria-hidden="true" />
