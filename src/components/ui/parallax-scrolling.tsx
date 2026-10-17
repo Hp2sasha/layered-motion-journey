@@ -60,9 +60,7 @@ export function ParallaxComponent() {
           <div className="parallax__fade" />
         </div>
       </section>
-      <section className="parallax__content">
-        <p className="parallax__content-text">Scroll to explore</p>
-      </section>
+      <section className="parallax__content" aria-hidden="true" />
     </div>
   );
 }
