@@ -6,7 +6,7 @@ describe("Torino sky modes", () => {
     expect(celestialBodyForMode("night")).toBe("sun");
     expect(celestialBodyForMode("day")).toBe("moon");
   });
-  it("completes the mode change in 1.5 seconds", () => {
-    expect(MODE_TRANSITION_MS).toBe(1500);
+  it("completes the mode change in 10 seconds", () => {
+    expect(MODE_TRANSITION_MS).toBe(10000);
   });
 });
