@@ -144,7 +144,7 @@
 }
 
 :root { --parallax-bg: oklch(0.12 0 0); --parallax-fg: oklch(0.97 0 0); --parallax-shadow: oklch(0 0 0 / 60%); }
-.parallax { --mode-transition: 1500ms; background: var(--parallax-bg); color: var(--parallax-fg); transition: background-color var(--mode-transition) ease; }
+.parallax { --mode-transition: 10000ms; background: var(--parallax-bg); color: var(--parallax-fg); transition: background-color var(--mode-transition) ease; }
 .parallax__header { position: relative; height: 100svh; min-height: 100vh; }
 .parallax__visuals { position: absolute; inset: 0; height: 120%; overflow: hidden; }
 .parallax__layers { position: absolute; inset: 0; overflow: hidden; }
