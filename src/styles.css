@@ -177,7 +177,9 @@
 .parallax__mode button[data-active="true"] { background: color-mix(in oklab, var(--parallax-fg) 16%, transparent); color: var(--parallax-fg); }
 .parallax__mode button:focus-visible { outline: 2px solid var(--parallax-fg); outline-offset: 2px; }
 
+/* Reduced motion: keep the requested day/night cross-fade (opacity/colour only),
+   but drop movement and the twinkle. */
 @media (prefers-reduced-motion: reduce) {
-  .parallax, .parallax__sky, .parallax__celestial, .parallax__layers > .parallax__layer-img { transition: none; }
+  .parallax__celestial { transform: none !important; transition: opacity var(--mode-transition) ease; }
   .parallax[data-mode="day"] .parallax__sky[data-sky="day"] { animation: none; }
 }
