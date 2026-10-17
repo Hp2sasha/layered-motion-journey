@@ -17,3 +17,6 @@
 > and a remote URL breaks the build). Any Persian heading needs `dir="rtl"` +
 > `lang="fa"` and `letter-spacing: 0` — negative tracking pulls Persian glyphs apart.
 <!-- LOVABLE:END-PERSIAN -->
+
+- Keep celestial bodies as separate, source-aligned transparent images inside the sky parallax layer so mode changes animate them independently without changing their responsive position.
+- Keep mode mapping and transition duration in the browser-safe parallax-mode module so behavior tests and the rendered scene use the same rules.
