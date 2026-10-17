@@ -4,10 +4,10 @@ import { ParallaxComponent } from "@/components/ui/parallax-scrolling";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Parallax — Layered Scrolling Hero" },
-      { name: "description", content: "A layered parallax hero with smooth scrolling." },
-      { property: "og:title", content: "Parallax — Layered Scrolling Hero" },
-      { property: "og:description", content: "A layered parallax hero with smooth scrolling." },
+      { title: "تورینو" },
+      { name: "description", content: "تورینو — بخش هیرو با لایه‌های متحرک و اسکرول نرم." },
+      { property: "og:title", content: "تورینو" },
+      { property: "og:description", content: "تورینو — بخش هیرو با لایه‌های متحرک و اسکرول نرم." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
