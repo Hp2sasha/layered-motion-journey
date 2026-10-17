@@ -22,12 +22,15 @@ export function ParallaxComponent() {
       const tl = gsap.timeline({
         scrollTrigger: { trigger: root, start: "top top", end: "bottom bottom", scrub: reducedMotion ? true : 0.35, invalidateOnRefresh: true },
       });
-      tl.to(".parallax__visuals", { y: () => -window.innerHeight * 1.15, duration: 1, ease: "none" }, 0)
+      tl.to(".parallax__visuals", { y: () => -window.innerHeight * 1.2 * 1.175 * 0.7, duration: 1, ease: "none" }, 0)
         .to(".parallax__underground", { y: () => -window.innerHeight, duration: 1, ease: "none" }, 0)
         .to(".parallax__underground", { y: () => -window.innerHeight * 2.8, duration: 2, ease: "none" });
       if (!reducedMotion) {
-        tl.to('[data-parallax-layer="1"]', { yPercent: 18, duration: 1, ease: "none" }, 0)
-          .to('[data-parallax-layer="2"]', { yPercent: 10, duration: 1, ease: "none" }, 0);
+        // Counter the shared descent at different speeds to retain mountain depth.
+        // The rear sky stays in view while the foreground reveals the earth.
+        for (const [layer, yPercent] of [[1, 70], [2, 55], [3, 40], [4, 10]] as const) {
+          tl.to(`[data-parallax-layer="${layer}"]`, { yPercent, duration: 1, ease: "none" }, 0);
+        }
       }
     }, root);
 
@@ -36,6 +39,7 @@ export function ParallaxComponent() {
     const tick = (time: number) => lenis.raf(time * 1000);
     gsap.ticker.add(tick);
     gsap.ticker.lagSmoothing(0);
+    ScrollTrigger.refresh();
 
     return () => {
       context.revert();
