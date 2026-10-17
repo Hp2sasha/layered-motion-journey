@@ -28,7 +28,7 @@ export function ParallaxComponent() {
       if (!reducedMotion) {
         // Counter the shared descent at different speeds to retain mountain depth.
         // The rear sky stays in view while the foreground reveals the earth.
-        for (const [layer, yPercent] of [[1, 70], [2, 55], [3, 40], [4, 10]]) {
+        for (const [layer, yPercent] of [[1, 70], [2, 55], [3, 40], [4, 10]] as const) {
           tl.to(`[data-parallax-layer="${layer}"]`, { yPercent, duration: 1, ease: "none" }, 0);
         }
       }
