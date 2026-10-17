@@ -160,16 +160,7 @@
 .parallax[data-mode="night"] { --parallax-bg: oklch(0.12 0 0); }
 .parallax[data-mode="day"] { --parallax-bg: oklch(0.24 0.05 255); --parallax-shadow: oklch(0.05 0.03 260 / 75%); }
 .parallax__layer-sky { position: absolute; inset: 0; }
-.parallax__sky { opacity: 0; transition: opacity 1500ms ease-in-out; }
-/* Sun and moon orbs: on mode change one sets below the horizon while the
-   other rises, over 1.5s, in sync with the sky crossfade. */
-.parallax__orb { position: absolute; width: clamp(64px, 9vw, 120px); aspect-ratio: 1; border-radius: 50%; pointer-events: none; transition: transform 1500ms ease-in-out, opacity 1500ms ease-in-out; }
-.parallax__orb--sun { top: 14%; inset-inline-end: 16%; background: radial-gradient(circle at 42% 38%, oklch(0.97 0.1 95), oklch(0.82 0.16 75) 55%, oklch(0.72 0.17 60)); box-shadow: 0 0 60px 24px oklch(0.85 0.15 80 / 55%), 0 0 140px 60px oklch(0.8 0.14 70 / 30%); }
-.parallax__orb--moon { top: 12%; inset-inline-start: 18%; background: radial-gradient(circle at 38% 34%, oklch(0.98 0.01 250), oklch(0.85 0.02 255) 60%, oklch(0.72 0.03 260)); box-shadow: 0 0 50px 18px oklch(0.9 0.02 250 / 40%), 0 0 120px 50px oklch(0.85 0.03 255 / 22%); }
-.parallax[data-mode="day"] .parallax__orb--sun { transform: translateY(0); opacity: 1; }
-.parallax[data-mode="day"] .parallax__orb--moon { transform: translateY(70vh); opacity: 0; }
-.parallax[data-mode="night"] .parallax__orb--sun { transform: translateY(70vh); opacity: 0; }
-.parallax[data-mode="night"] .parallax__orb--moon { transform: translateY(0); opacity: 1; }
+.parallax__sky { opacity: 0; transition: opacity 900ms ease; }
 .parallax[data-mode="night"] .parallax__sky[data-sky="night"],
 .parallax[data-mode="day"] .parallax__sky[data-sky="day"] { opacity: 1; }
 .parallax[data-mode="day"] .parallax__sky[data-sky="day"] { animation: parallax-twinkle 7s ease-in-out infinite; }
@@ -183,6 +174,6 @@
 .parallax__mode button:focus-visible { outline: 2px solid var(--parallax-fg); outline-offset: 2px; }
 
 @media (prefers-reduced-motion: reduce) {
-  .parallax__sky, .parallax__orb { transition: none; }
+  .parallax__sky { transition: none; }
   .parallax[data-mode="day"] .parallax__sky[data-sky="day"] { animation: none; }
 }
