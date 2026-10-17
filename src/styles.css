@@ -183,6 +183,6 @@
 .parallax__mode button:focus-visible { outline: 2px solid var(--parallax-fg); outline-offset: 2px; }
 
 @media (prefers-reduced-motion: reduce) {
-  .parallax__sky { transition: none; }
+  .parallax__sky, .parallax__orb { transition: none; }
   .parallax[data-mode="day"] .parallax__sky[data-sky="day"] { animation: none; }
 }
