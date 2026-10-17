@@ -143,14 +143,41 @@
   }
 }
 
-:root { --parallax-bg: oklch(0.12 0 0); --parallax-fg: oklch(0.97 0 0); --parallax-shadow: oklch(0 0 0 / 60%); }
-.parallax { background: var(--parallax-bg); color: var(--parallax-fg); }
-.parallax__header { position: relative; height: 100svh; min-height: 100vh; }
+:root {
+  --parallax-bg: oklch(0.12 0 0);
+  --parallax-fg: oklch(0.97 0 0);
+  --parallax-shadow: oklch(0 0 0 / 60%);
+  --scene-control: oklch(0.17 0.01 200 / 80%);
+  --scene-control-active: oklch(0.97 0 0 / 20%);
+  --scene-control-border: oklch(0.97 0 0 / 25%);
+  --earth-shade: oklch(0.08 0 0 / 36%);
+}
+.parallax { position: relative; height: 400svh; background: var(--parallax-bg); color: var(--parallax-fg); font-family: "Vazirmatn", sans-serif; }
+.parallax[data-mode="day"] { --scene-control: oklch(0.96 0.01 200 / 85%); --scene-control-active: oklch(0.35 0.03 200 / 14%); --scene-control-border: oklch(0.35 0.03 200 / 25%); --earth-shade: oklch(0.08 0 0 / 0%); }
+.parallax__header { position: sticky; top: 0; height: 100svh; overflow: hidden; }
 .parallax__visuals { position: absolute; inset: 0; height: 120%; overflow: hidden; }
 .parallax__layers { position: absolute; inset: 0; overflow: hidden; }
 .parallax__layer-img { position: absolute; top: -17.5%; left: 0; width: 100%; height: 117.5%; object-fit: cover; pointer-events: none; }
-.parallax__layer-title { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; height: 100svh; padding-block-end: 16svh; }
-.parallax__title { font-family: "Lalezar", "Vazirmatn", ui-sans-serif, system-ui, sans-serif; font-size: clamp(4.5rem, 13vw, 13rem); font-weight: 400; letter-spacing: 0; line-height: 1.15; text-align: center; text-shadow: 0 3px 36px var(--parallax-shadow), 0 0 110px var(--parallax-shadow); }
+.parallax__layer-title { position: absolute; inset: 0; z-index: 5; display: flex; align-items: center; justify-content: center; height: 100svh; padding-block-end: 16svh; }
+.parallax__title { font-family: "Lalezar", "Vazirmatn", ui-sans-serif, system-ui, sans-serif; font-size: 9rem; max-width: 100%; font-weight: 400; letter-spacing: 0; line-height: 1.15; text-align: center; text-shadow: 0 3px 36px var(--parallax-shadow), 0 0 110px var(--parallax-shadow); }
 .parallax__fade { position: absolute; bottom: 0; left: 0; width: 100%; height: 20%; background: linear-gradient(to top, var(--parallax-bg), transparent); z-index: 30; }
 .parallax__black-line-overflow { position: absolute; bottom: -1px; left: 0; width: 100%; height: 2px; background: var(--parallax-bg); z-index: 20; }
-.parallax__content { position: relative; z-index: 2; min-height: 100vh; }
+.parallax__starry { opacity: 0; transition: opacity 600ms ease; }
+.parallax[data-mode="day"] .parallax__starry { opacity: 1; }
+.parallax[data-mode="day"] [data-parallax-layer="2"], .parallax[data-mode="day"] [data-parallax-layer="4"] { filter: brightness(1.15); }
+.parallax__underground { position: absolute; top: 100%; left: 0; width: 100%; height: 280svh; will-change: transform; }
+.parallax__earth-img { width: 100%; height: 100%; object-fit: fill; display: block; }
+.parallax__underground::before { content: ""; position: absolute; top: -1px; inset-inline: 0; height: 12%; background: linear-gradient(to bottom, var(--parallax-bg), transparent); }
+.parallax__earth-shade { position: absolute; inset: 0; background: var(--earth-shade); transition: background 600ms ease; }
+.parallax__mode-control { position: fixed; top: 24px; right: 24px; z-index: 50; display: flex; gap: 4px; padding: 4px; border: 1px solid var(--scene-control-border); border-radius: 8px; background: var(--scene-control); backdrop-filter: blur(16px); }
+.parallax__mode-button { color: var(--parallax-fg); border-radius: 4px; }
+.parallax__mode-button:hover, .parallax__mode-button[aria-pressed="true"] { background: var(--scene-control-active); color: var(--parallax-fg); }
+.parallax[data-mode="day"] .parallax__mode-button { color: var(--foreground); }
+@media (max-width: 640px) {
+  .parallax__title { font-size: 6rem; }
+  .parallax__mode-control { top: 16px; right: 16px; }
+  .parallax__earth-img { object-fit: cover; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .parallax__starry, .parallax__earth-shade { transition: none; }
+}
