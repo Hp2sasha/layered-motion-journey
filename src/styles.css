@@ -158,13 +158,14 @@
 /* Day / night modes. Night is the original moonlit mountain scene; day keeps the
    same mountains under a star-filled sky with a lighter overall backdrop. */
 .parallax[data-mode="night"] { --parallax-bg: oklch(0.12 0 0); }
-.parallax[data-mode="day"] { --parallax-bg: oklch(0.34 0.05 250); --parallax-shadow: oklch(0.08 0.03 260 / 70%); }
+.parallax[data-mode="day"] { --parallax-bg: oklch(0.24 0.05 255); --parallax-shadow: oklch(0.05 0.03 260 / 75%); }
 .parallax__layer-sky { position: absolute; inset: 0; }
 .parallax__sky { opacity: 0; transition: opacity 900ms ease; }
 .parallax[data-mode="night"] .parallax__sky[data-sky="night"],
 .parallax[data-mode="day"] .parallax__sky[data-sky="day"] { opacity: 1; }
 .parallax[data-mode="day"] .parallax__sky[data-sky="day"] { animation: parallax-twinkle 7s ease-in-out infinite; }
-.parallax[data-mode="day"] .parallax__layer-img:not(.parallax__sky) { filter: brightness(1.16) saturate(1.06); }
+/* Mountains stay moonlit-dark in day mode too: dimmed, cooled toward blue. */
+.parallax[data-mode="day"] .parallax__layer-img:not(.parallax__sky) { filter: sepia(0.4) hue-rotate(180deg) saturate(0.9) brightness(0.42) contrast(1.08); }
 @keyframes parallax-twinkle { 50% { filter: brightness(1.14); } }
 
 .parallax__mode { position: absolute; top: 1.5rem; inset-inline-start: 1.5rem; z-index: 10; display: flex; gap: 2px; padding: 4px; border-radius: 999px; border: 1px solid color-mix(in oklab, var(--parallax-fg) 22%, transparent); background: color-mix(in oklab, var(--parallax-bg) 55%, transparent); backdrop-filter: blur(10px); }
