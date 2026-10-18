@@ -8,6 +8,13 @@
       "when": 1792358149681,
       "tag": "0000_torino_accounts_trips_bookings",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1792358200574,
+      "tag": "0001_booking_read_helper",
+      "breakpoints": true
     }
   ]
 }

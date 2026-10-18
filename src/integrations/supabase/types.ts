@@ -345,6 +345,7 @@ export type Database = {
         }
         Returns: boolean
       }
+      is_trip_customer: { Args: { trip: string }; Returns: boolean }
       rate_trip: {
         Args: { message: string; request_id: string; stars: number }
         Returns: undefined
