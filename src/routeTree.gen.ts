@@ -10,147 +10,33 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
-import { Route as AuthRouteImport } from './routes/auth'
-import { Route as LeadersRouteImport } from './routes/leaders'
-import { Route as ResetPasswordRouteImport } from './routes/reset-password'
-import { Route as ToursRouteImport } from './routes/tours'
-import { Route as AuthenticatedAccountRouteImport } from './routes/_authenticated/account'
-import { Route as AuthenticatedManagementRouteImport } from './routes/_authenticated/management'
-import { Route as LeadersLeaderIdRouteImport } from './routes/leaders_.$leaderId'
-import { Route as ToursTourIdRouteImport } from './routes/tours_.$tourId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
-  id: '/_authenticated',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthRoute = AuthRouteImport.update({
-  id: '/auth',
-  path: '/auth',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LeadersRoute = LeadersRouteImport.update({
-  id: '/leaders',
-  path: '/leaders',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ResetPasswordRoute = ResetPasswordRouteImport.update({
-  id: '/reset-password',
-  path: '/reset-password',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ToursRoute = ToursRouteImport.update({
-  id: '/tours',
-  path: '/tours',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthenticatedAccountRoute = AuthenticatedAccountRouteImport.update({
-  id: '/account',
-  path: '/account',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedManagementRoute = AuthenticatedManagementRouteImport.update({
-  id: '/management',
-  path: '/management',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const LeadersLeaderIdRoute = LeadersLeaderIdRouteImport.update({
-  id: '/leaders_/$leaderId',
-  path: '/leaders/$leaderId',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ToursTourIdRoute = ToursTourIdRouteImport.update({
-  id: '/tours_/$tourId',
-  path: '/tours/$tourId',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/auth': typeof AuthRoute
-  '/leaders': typeof LeadersRoute
-  '/reset-password': typeof ResetPasswordRoute
-  '/tours': typeof ToursRoute
-  '/account': typeof AuthenticatedAccountRoute
-  '/management': typeof AuthenticatedManagementRoute
-  '/leaders/$leaderId': typeof LeadersLeaderIdRoute
-  '/tours/$tourId': typeof ToursTourIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/auth': typeof AuthRoute
-  '/leaders': typeof LeadersRoute
-  '/reset-password': typeof ResetPasswordRoute
-  '/tours': typeof ToursRoute
-  '/account': typeof AuthenticatedAccountRoute
-  '/management': typeof AuthenticatedManagementRoute
-  '/leaders/$leaderId': typeof LeadersLeaderIdRoute
-  '/tours/$tourId': typeof ToursTourIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
-  '/auth': typeof AuthRoute
-  '/leaders': typeof LeadersRoute
-  '/reset-password': typeof ResetPasswordRoute
-  '/tours': typeof ToursRoute
-  '/_authenticated/account': typeof AuthenticatedAccountRoute
-  '/_authenticated/management': typeof AuthenticatedManagementRoute
-  '/leaders_/$leaderId': typeof LeadersLeaderIdRoute
-  '/tours_/$tourId': typeof ToursTourIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/auth'
-    | '/leaders'
-    | '/reset-password'
-    | '/tours'
-    | '/account'
-    | '/management'
-    | '/leaders/$leaderId'
-    | '/tours/$tourId'
+  fullPaths: '/'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | '/auth'
-    | '/leaders'
-    | '/reset-password'
-    | '/tours'
-    | '/account'
-    | '/management'
-    | '/leaders/$leaderId'
-    | '/tours/$tourId'
-  id:
-    | '__root__'
-    | '/'
-    | '/_authenticated'
-    | '/auth'
-    | '/leaders'
-    | '/reset-password'
-    | '/tours'
-    | '/_authenticated/account'
-    | '/_authenticated/management'
-    | '/leaders_/$leaderId'
-    | '/tours_/$tourId'
+  to: '/'
+  id: '__root__' | '/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
-  AuthRoute: typeof AuthRoute
-  LeadersRoute: typeof LeadersRoute
-  ResetPasswordRoute: typeof ResetPasswordRoute
-  ToursRoute: typeof ToursRoute
-  LeadersLeaderIdRoute: typeof LeadersLeaderIdRoute
-  ToursTourIdRoute: typeof ToursTourIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -162,94 +48,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_authenticated': {
-      id: '/_authenticated'
-      path: ''
-      fullPath: '/'
-      preLoaderRoute: typeof AuthenticatedRouteRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/auth': {
-      id: '/auth'
-      path: '/auth'
-      fullPath: '/auth'
-      preLoaderRoute: typeof AuthRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/leaders': {
-      id: '/leaders'
-      path: '/leaders'
-      fullPath: '/leaders'
-      preLoaderRoute: typeof LeadersRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/reset-password': {
-      id: '/reset-password'
-      path: '/reset-password'
-      fullPath: '/reset-password'
-      preLoaderRoute: typeof ResetPasswordRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/tours': {
-      id: '/tours'
-      path: '/tours'
-      fullPath: '/tours'
-      preLoaderRoute: typeof ToursRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/account': {
-      id: '/_authenticated/account'
-      path: '/account'
-      fullPath: '/account'
-      preLoaderRoute: typeof AuthenticatedAccountRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/management': {
-      id: '/_authenticated/management'
-      path: '/management'
-      fullPath: '/management'
-      preLoaderRoute: typeof AuthenticatedManagementRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/leaders_/$leaderId': {
-      id: '/leaders_/$leaderId'
-      path: '/leaders/$leaderId'
-      fullPath: '/leaders/$leaderId'
-      preLoaderRoute: typeof LeadersLeaderIdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/tours_/$tourId': {
-      id: '/tours_/$tourId'
-      path: '/tours/$tourId'
-      fullPath: '/tours/$tourId'
-      preLoaderRoute: typeof ToursTourIdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
-interface AuthenticatedRouteRouteChildren {
-  AuthenticatedAccountRoute: typeof AuthenticatedAccountRoute
-  AuthenticatedManagementRoute: typeof AuthenticatedManagementRoute
-}
-
-const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
-  AuthenticatedAccountRoute: AuthenticatedAccountRoute,
-  AuthenticatedManagementRoute: AuthenticatedManagementRoute,
-}
-
-const AuthenticatedRouteRouteWithChildren =
-  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
-  AuthRoute: AuthRoute,
-  LeadersRoute: LeadersRoute,
-  ResetPasswordRoute: ResetPasswordRoute,
-  ToursRoute: ToursRoute,
-  LeadersLeaderIdRoute: LeadersLeaderIdRoute,
-  ToursTourIdRoute: ToursTourIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
