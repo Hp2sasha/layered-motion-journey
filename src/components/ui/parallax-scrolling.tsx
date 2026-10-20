@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "@studio-freight/lenis";
@@ -49,7 +49,7 @@ function MoonIcon() {
   );
 }
 
-export function ParallaxComponent() {
+export function ParallaxComponent({ children }: { children?: ReactNode }) {
   const parallaxRef = useRef<HTMLDivElement>(null);
   const [mode, setMode] = useState<Mode>("night");
 
@@ -153,7 +153,7 @@ export function ParallaxComponent() {
           </Button>
         </div>
       </section>
-      <section className="parallax__content" aria-hidden="true" />
+      <section className="parallax__content">{children}</section>
     </div>
   );
 }

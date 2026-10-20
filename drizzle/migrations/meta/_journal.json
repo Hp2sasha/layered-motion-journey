@@ -15,6 +15,13 @@
       "when": 1792358200574,
       "tag": "0001_booking_read_helper",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1792516976798,
+      "tag": "0002_limit_profile_edits",
+      "breakpoints": true
     }
   ]
 }

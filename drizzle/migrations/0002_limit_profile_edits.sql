@@ -1,0 +1,1 @@
+REVOKE UPDATE ON public.profiles FROM authenticated; GRANT UPDATE(display_name,phone) ON public.profiles TO authenticated;
