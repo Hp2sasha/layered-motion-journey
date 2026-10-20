@@ -12,6 +12,8 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { SessionProvider } from '@/components/travel/session';
+import { SiteNavigation } from '@/components/travel/navigation';
 
 function NotFoundComponent() {
   return (
@@ -78,11 +80,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
+      { title: "تورینو | همراه سفر" },
+      { name: "description", content: "انتخاب تور و همراه سفر در تورینو" },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { property: "og:title", content: "تورینو | همراه سفر" },
+      { property: "og:description", content: "انتخاب تور و همراه سفر در تورینو" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },
@@ -107,7 +109,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="fa">
       <head>
         <HeadContent />
       </head>
@@ -124,8 +126,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <SessionProvider><SiteNavigation /><Outlet /></SessionProvider>
     </QueryClientProvider>
   );
 }

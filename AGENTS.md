@@ -20,3 +20,6 @@
 
 - Keep celestial bodies as separate, source-aligned transparent images inside the sky parallax layer so mode changes animate them independently without changing their responsive position.
 - Keep mode mapping and transition duration in the browser-safe parallax-mode module so behavior tests and the rendered scene use the same rules.
+- Keep public discovery routes separate from client-gated account routes; private operations use authenticated server functions with database authorization so route guards never substitute for data access checks.
+- Keep shared travel eligibility and validation rules in browser-safe modules; server functions validate them again and database routines own sensitive booking transitions.
+- Preserve the parallax scene as an independent visual container; render functional discovery content through its children without changing sky or celestial positioning.
