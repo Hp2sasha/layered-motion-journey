@@ -156,9 +156,10 @@
 .parallax__content { position: relative; z-index: 2; min-height: 100vh; }
 
 /* Day / night modes. Night is the original moonlit mountain scene; day keeps the
-   same mountains under a star-filled sky with a lighter overall backdrop. */
+   same mountains under a star-filled sky dissolving into a pale, near-white
+   backdrop that fades in gradually instead of starting under the mountains. */
 .parallax[data-mode="night"] { --parallax-bg: oklch(0.12 0 0); }
-.parallax[data-mode="day"] { --parallax-bg: oklch(0.24 0.05 255); --parallax-shadow: oklch(0.05 0.03 260 / 75%); }
+.parallax[data-mode="day"] { --parallax-bg: oklch(0.955 0.012 255); --parallax-shadow: oklch(0.05 0.03 260 / 75%); }
 .parallax__layer-sky { position: absolute; inset: 0; }
 .parallax__sky { opacity: 0; transition: opacity var(--mode-transition) ease; }
 .parallax[data-mode="night"] .parallax__sky[data-sky="night"],
@@ -167,6 +168,12 @@
 /* Mountains stay moonlit-dark in day mode too: dimmed, cooled toward blue. */
 .parallax__layers > .parallax__layer-img { transition: filter var(--mode-transition) ease; }
 .parallax[data-mode="day"] .parallax__layers > .parallax__layer-img { filter: sepia(0.4) hue-rotate(180deg) saturate(0.9) brightness(0.42) contrast(1.08); }
+/* Day mode dissolves the whole scene (mountains, foreground person, sky) into
+   the pale backdrop below, so the light ground fades in instead of starting on
+   a hard line under the mountains. The night-mode mask is fully opaque and kept
+   structurally identical so the two gradients interpolate during the cross-fade. */
+.parallax__layers { -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 68%, #000 100%); mask-image: linear-gradient(to bottom, #000 0%, #000 68%, #000 100%); transition: -webkit-mask-image var(--mode-transition) ease, mask-image var(--mode-transition) ease; }
+.parallax[data-mode="day"] .parallax__layers { -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 68%, transparent 100%); mask-image: linear-gradient(to bottom, #000 0%, #000 68%, transparent 100%); }
 .parallax__celestial { opacity: 0; transform: translateY(-5%) scale(0.96); transition: opacity var(--mode-transition) ease, transform var(--mode-transition) cubic-bezier(0.22, 1, 0.36, 1); }
 .parallax[data-celestial="sun"] [data-body="sun"],
 .parallax[data-celestial="moon"] [data-body="moon"] { opacity: 1; transform: translateY(0) scale(1); }
